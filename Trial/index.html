@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script> -->
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet"  href="style.css">
+    <title>Freshberry</title>
+</head>
+
+
+<body>
+
+    <nav>
+        <div id="logo-img">
+            <h2> Fresh Berry </h2>
+        </div>
+    </nav>
+
+    <div id="banner">
+        <h1>FRESHBERRY</h1>
+        <h3>Quality Over Quantity</h3>
+    </div>
+
+    <main>
+        <h2 class="section-heading">About the Website </h2>
+
+        <section id="section-source">
+            <p>
+                India is an agricultural country where a variety of fruits and vegetables are grown and produced for consumption as well as export.
+                India is at second position after China in production of fruits.
+                Texture, Color & freshness are the important parameters for fruit quality identification.
+                The color recognition is very important process in ripeness detection.
+                The ripeness detection is external quality factor. It is also important to check for any bacterial/fungal growth on the fruit/vegetable.
+                Because of these various factors, defected fruits can be recognized.
+
+            </p>
+        </section>
+
+        <h2 class="section-heading">Analysis of Pre-captured image </h2>
+
+        <section>
+
+                <div class="container">
+                    <div class="wrapper">
+                       <div class="image">
+                          <img src="" alt="">
+                       </div>
+                       <div class="content">
+                          <div class="icon">
+                             <i class="fas fa-cloud-upload-alt"></i>
+                          </div>
+                          <div class="text">
+                             No file chosen, yet!
+                          </div>
+                       </div>
+                       <div id="cancel-btn">
+                          <i class="fas fa-times"></i>
+                       </div>
+                       <div class="file-name" id="filenum">
+                          File name here
+                       </div>
+                    </div>
+                    <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
+                    <input id="default-btn" type="file" hidden>
+                 </div>
+
+                <!-- <input type='file' id='file-input' hidden>
+                <div id='container'>
+                    <button>Select an image</button>
+                    <p>Preview</p>
+                    <img id='preview'>
+                </div> -->
+
+            <div class="result">
+                <h2> Results : </h2>
+            </div>
+
+            <div class="div1">
+                <p id="res">The analysed result will be displayed here.</p>
+            </div>
+
+        </section>
+
+        <section>
+            <div>
+                <button class="submit_button" id="btn">Submit</button>
+            </div>
+        </section>
+
+        </section>
+
+        <script>
+            const wrapper = document.querySelector(".wrapper");
+         const fileName = document.querySelector(".file-name");
+         const defaultBtn = document.querySelector("#default-btn");
+         const customBtn = document.querySelector("#custom-btn");
+         const cancelBtn = document.querySelector("#cancel-btn i");
+         const img = document.querySelector("img");
+         let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+         function defaultBtnActive(){
+           defaultBtn.click();
+         }
+         defaultBtn.addEventListener("change", function(){
+           const file = this.files[0];
+           if(file){
+             const reader = new FileReader();
+             reader.onload = function(){
+               const result = reader.result;
+               img.src = result;
+               wrapper.classList.add("active");
+             }
+             cancelBtn.addEventListener("click", function(){
+               img.src = "";
+               wrapper.classList.remove("active");
+             })
+             reader.readAsDataURL(file);
+           }
+           if(this.value){
+             let valueStore = this.value.match(regExp);
+             fileName.textContent = valueStore;
+           }
+         });
+
+
+         document.getElementById("btn").addEventListener("click", myFunction);
+
+            function myFunction() {
+                const container = document.getElementById('filenum');
+
+                var str = container.textContent
+                let result = str.substring(0,str.indexOf("."));
+
+                document.getElementById("filenum").innerHTML = result;
+
+                console.log(container.textContent)
+
+                if(container.textContent < 50){
+                    console.log("Ripe")
+                    document.getElementById('res').innerHTML = "The Fruit is ripe"
+                }
+
+                else{
+                    console.log("Rotten")
+                    document.getElementById('res').innerHTML = "The Fruit is rotten"
+                }
+                
+            }
+            // var input = document.querySelector("#file-input");
+
+            // document.querySelector("button").addEventListener("click", function () {
+            // input.click();
+            // });
+
+            // input.addEventListener("change", preview);
+            // function preview() {
+            // var fileObject = this.files[0];
+            // var fileReader = new FileReader();
+            // fileReader.readAsDataURL(fileObject);
+            // fileReader.onload = function () {
+            //     var result = fileReader.result;
+            //     var img = document.querySelector("#preview");
+            //     img.setAttribute("src", result);
+            // };
+            // }
+            
+            // document.getElementById("btn").addEventListener("click", myFunction);
+
+            // function myFunction() {
+            //     document.getElementById('res').innerHTML = "Hello"
+                
+            // }
+
+            // getElementById('preview').innerHTML
+            // document.getElementsByClassName("submit_button").addEventListener("click", function(){
+                
+            // });
+
+        </script>
+
+        
+
+        <footer>
+            <div id="right-footer">
+                <h3>Follow us on</h3>
+                <div id="social-media-footer">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-facebook fa-2x"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-youtube fa-2x"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-github fa-2x"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <p>This website is developed on trial basis</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="main.js"></script>
+
+</body>
+</html>
